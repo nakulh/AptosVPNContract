@@ -88,8 +88,9 @@ module vpn_registery::vpn_manager {
     entry fun delete(caller: &signer, object: Object<VpnProvider>) acquires VpnProvider {
         let caller_address = signer::address_of(caller);
         let allowed_to_delete = false;
-
-        let allowed_addresses: vector<address> = vector::singleton<address>(@0xbd2497fc645660a5c4a3e0739c0d5fb7ca68e2f717d2ac35280054c907b1db6e);
+        
+        // addresses of validator nodes, this needs to be made into a dynamic vector instead of hard coding it like this
+        let allowed_addresses: vector<address> = vector::singleton<address>(@0xbd2497fc645660a5c4a3e0739c0d5fb7ca68e2f717d2ac35280054c907b1db6e); 
         let length_of_validator_addresses = vector::length(&allowed_addresses);
         for (i in 0..length_of_validator_addresses) {
             let current_validator_address: &address = vector::borrow(&allowed_addresses, i);
